@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-Hant" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="兰亭序逐字对比——点击任意一字，并列查看神龙本、褚摹本、虞摹本、定武本的字形。" />
+    <title>逐字对比 · 兰亭序</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/theme.js"></script>
+  </head>
+  <body>
+
+    <!-- 顶栏 -->
+    <header class="topbar">
+      <div class="topbar__inner">
+        <a href="/" class="topbar__back" aria-label="返回首页">← 蘭亭序</a>
+        <span class="topbar__page-title">逐字对比</span>
+        <button class="topbar__theme-btn" type="button" onclick="ltToggleTheme()" aria-label="切换主题">
+          <span class="topbar__theme-icon"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- 卷轴区：由 main.js 填充 -->
+    <div id="lt-scroll" class="lt-scroll" role="region" aria-label="兰亭序全文"></div>
+
+    <!-- 对比面板：由 main.js 填充 -->
+    <div id="lt-panel" class="lt-panel" role="complementary" aria-label="字形对比" aria-live="polite"></div>
+
+    <script src="/data/lanting-data.js"></script>
+    <script src="/main.js"></script>
+    <script src="/lightbox.js"></script>
+  </body>
+</html>

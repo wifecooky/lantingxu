@@ -244,3 +244,20 @@ a:hover {
     grid-template-columns: 1fr;
   }
 }
+
+/* 顶栏 · 返回链接 */
+.topbar__back {
+  font-size: clamp(14px, 1.6vw, 16px);
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+.topbar__back:hover {
+  color: var(--accent);
+}
+
+.topbar__page-title {
+  font-size: 14px;
+  color: var(--text-secondary);
+  letter-spacing: 0.15em;
+}
