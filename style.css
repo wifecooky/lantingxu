@@ -261,3 +261,199 @@ a:hover {
   color: var(--text-secondary);
   letter-spacing: 0.15em;
 }
+
+/* ============================================
+   卷轴区：竖排横滚
+   ============================================ */
+
+.lt-scroll {
+  position: relative;
+  background: var(--char-bg);
+  padding: clamp(28px, 4vw, 48px) clamp(20px, 4vw, 40px);
+  writing-mode: vertical-rl;
+  -webkit-writing-mode: vertical-rl;
+  height: clamp(440px, 60vh, 640px);
+  max-width: 100vw;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.lt-scroll::-webkit-scrollbar { height: 6px; }
+.lt-scroll::-webkit-scrollbar-track { background: transparent; }
+.lt-scroll::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+
+/* 一句一列 */
+.lt-col {
+  display: block;
+  margin-left: clamp(8px, 1.4vw, 18px);
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1.65;
+  letter-spacing: 0.05em;
+}
+
+/* 可点击的字 */
+.lt-ch {
+  display: inline;
+  cursor: pointer;
+  transition: color 0.18s ease, background 0.18s ease;
+  border-radius: 2px;
+  padding: 1px 2px;
+  /* 最小点击区域 44×44px：padding + line-height 保证 */
+  min-width: 44px;
+  min-height: 44px;
+}
+.lt-ch:hover {
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+.lt-ch:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.lt-ch--active {
+  color: var(--accent);
+  background: var(--accent-dim);
+  font-weight: 700;
+}
+
+/* 标点 */
+.lt-pun {
+  display: inline;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   对比面板
+   ============================================ */
+
+.lt-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: var(--panel-bg);
+  border-top: 1px solid var(--border);
+  padding: 0;
+  max-height: 35vh;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.2s ease-out;
+}
+.lt-panel--open {
+  transform: translateY(0);
+}
+
+.lt-panel__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px clamp(16px, 3vw, 24px);
+  border-bottom: 1px solid var(--border);
+}
+
+.lt-panel__char {
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 700;
+}
+
+.lt-panel__pos {
+  font-size: 13px;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.lt-panel__close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+}
+.lt-panel__close:hover {
+  color: var(--text);
+}
+
+/* 版本并列网格 */
+.lt-panel__grid {
+  display: flex;
+  gap: clamp(12px, 2vw, 24px);
+  padding: clamp(12px, 2vw, 20px) clamp(16px, 3vw, 24px);
+  overflow-x: auto;
+  justify-content: center;
+}
+
+.lt-panel__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.lt-panel__img-wrap {
+  width: 120px;
+  height: 120px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--char-bg);
+  border: 1px solid var(--img-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lt-panel__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.lt-panel__img-wrap--missing {
+  background: var(--missing-bg);
+}
+
+.lt-panel__missing {
+  font-size: 24px;
+  color: var(--missing-text);
+}
+
+.lt-panel__ver-name {
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+/* ============================================
+   响应式 · 对比页
+   ============================================ */
+
+@media (max-width: 768px) {
+  .lt-scroll {
+    height: 70vh;
+    font-size: clamp(18px, 5vw, 24px);
+  }
+
+  .lt-panel {
+    max-height: 45vh;
+  }
+
+  .lt-panel__img-wrap {
+    width: 80px;
+    height: 80px;
+  }
+
+  .lt-panel__grid {
+    justify-content: flex-start;
+  }
+}
