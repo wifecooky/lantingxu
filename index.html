@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-Hant" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="王羲之《兰亭序》主要传世摹本——神龙本、褚摹本、虞摹本、定武本——的逐字对比。点击任意一字，并列查看各版本字形。" />
+    <title>兰亭序 · 多版本逐字对比</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/theme.js"></script>
+  </head>
+  <body>
+
+    <!-- 顶栏 -->
+    <header class="topbar">
+      <div class="topbar__inner">
+        <span class="topbar__title">蘭亭序</span>
+        <button class="topbar__theme-btn" type="button" onclick="ltToggleTheme()" aria-label="切换主题">
+          <span class="topbar__theme-icon"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="page">
+      <!-- 标题区 -->
+      <div class="landing-hero">
+        <h1 class="landing-hero__title">蘭亭序</h1>
+        <p class="landing-hero__subtitle">王羲之 · 永和九年</p>
+        <p class="landing-hero__desc">
+          永和九年三月初三，王羲之与友人会于会稽山阴之兰亭，修禊事。
+          王羲之乘兴而书，写下这篇被誉为「天下第一行书」的序文。
+          原迹已不存，传世者皆为唐代摹本与刻本。本站收录四种主要版本，逐字并列对比。
+        </p>
+      </div>
+
+      <!-- 版本卡片 -->
+      <section class="versions">
+        <h2 class="versions__heading">收录版本</h2>
+        <div class="versions__grid">
+
+          <article class="version-card">
+            <h3 class="version-card__name">神龙本</h3>
+            <p class="version-card__attr">冯承素摹</p>
+            <p class="version-card__loc">北京故宫博物院</p>
+            <p class="version-card__note">公认最接近原迹，双钩廓填法</p>
+          </article>
+
+          <article class="version-card">
+            <h3 class="version-card__name">褚摹本</h3>
+            <p class="version-card__attr">褚遂良摹</p>
+            <p class="version-card__loc">北京故宫博物院</p>
+            <p class="version-card__note">黄绢本，褚遂良风格明显</p>
+          </article>
+
+          <article class="version-card">
+            <h3 class="version-card__name">虞摹本</h3>
+            <p class="version-card__attr">虞世南摹</p>
+            <p class="version-card__loc">北京故宫博物院</p>
+            <p class="version-card__note">又称天历本，圆润温雅</p>
+          </article>
+
+          <article class="version-card">
+            <h3 class="version-card__name">定武本</h3>
+            <p class="version-card__attr">欧阳询临刻</p>
+            <p class="version-card__loc">拓本系统</p>
+            <p class="version-card__note">石刻拓本，刚劲方正</p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- 进入对比 -->
+      <div class="landing-cta">
+        <a href="/compare/" class="landing-cta__btn">进入对比</a>
+      </div>
+    </main>
+
+  </body>
+</html>
