@@ -279,6 +279,8 @@ a:hover {
   scroll-behavior: smooth;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
 }
 
 .lt-scroll::-webkit-scrollbar { height: 6px; }
@@ -303,10 +305,7 @@ a:hover {
   cursor: pointer;
   transition: color 0.18s ease, background 0.18s ease;
   border-radius: 2px;
-  padding: 1px 2px;
-  /* 最小点击区域 44×44px：padding + line-height 保证 */
-  min-width: 44px;
-  min-height: 44px;
+  padding: 4px 2px;
 }
 .lt-ch:hover {
   color: var(--accent);

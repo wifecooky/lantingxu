@@ -121,6 +121,8 @@
       img.src = "/assets/" + v.id + "/" + padNum(gidx + 1) + ".jpg";
       img.alt = v.name + " · " + ch;
       img.loading = "lazy";
+      img.tabIndex = 0;
+      img.setAttribute("role", "button");
       /* 加载失败 → 显示「缺」 */
       img.onerror = function () {
         imgWrap.classList.add("lt-panel__img-wrap--missing");
@@ -170,9 +172,12 @@
     ch.click();
   });
 
-  /* 键盘：Escape 关闭 */
+  /* 键盘：Escape 关闭（lightbox 打开时让 lightbox 先处理） */
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") closePanel();
+    if (e.key === "Escape") {
+      if (document.querySelector(".lightbox--open")) return;
+      closePanel();
+    }
   });
 
   /* 键盘：← → 切换前/后一个字 */
