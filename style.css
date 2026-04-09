@@ -1,0 +1,75 @@
+/* 兰亭序 · 多版本逐字对比
+ *
+ * 双主题：
+ *   [data-theme="dark"]  夜帖古卷
+ *   [data-theme="light"] 兰亭春色
+ *
+ * 布局：两页共享，响应式断点 768px
+ */
+
+/* ============================================
+   主题变量
+   ============================================ */
+
+[data-theme="dark"] {
+  --bg: #1a1a1a;
+  --bg-elevated: #2a2520;
+  --text: #c8b88a;
+  --text-secondary: #999;
+  --accent: #7a9e7e;
+  --accent-dim: rgba(122, 158, 126, 0.15);
+  --border: rgba(255, 255, 255, 0.08);
+  --panel-bg: #222;
+  --char-bg: #2a2520;
+  --char-active: #3a3228;
+  --img-border: transparent;
+  --scrollbar-thumb: #555;
+  --missing-bg: #333;
+  --missing-text: #666;
+}
+
+[data-theme="light"] {
+  --bg: #f0ebe3;
+  --bg-elevated: rgba(255, 255, 255, 0.6);
+  --text: #4a4540;
+  --text-secondary: #777;
+  --accent: #6b8e6b;
+  --accent-dim: rgba(107, 142, 107, 0.12);
+  --border: rgba(0, 0, 0, 0.08);
+  --panel-bg: #faf7f2;
+  --char-bg: #e8e4dd;
+  --char-active: #d8d0c4;
+  --img-border: rgba(0, 0, 0, 0.08);
+  --scrollbar-thumb: #c0b8a8;
+  --missing-bg: #e0dbd2;
+  --missing-text: #aaa;
+}
+
+/* ============================================
+   基础重置
+   ============================================ */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-feature-settings: "palt", "kern";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
