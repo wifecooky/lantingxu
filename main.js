@@ -122,7 +122,7 @@
       var imgWrap = el("div", "lt-panel__img-wrap");
       var img = document.createElement("img");
       img.className = "lt-panel__img";
-      img.src = "/assets/" + v.id + "/" + padNum(gidx + 1) + ".jpg";
+      img.src = "../assets/" + v.id + "/" + padNum(gidx + 1) + ".jpg";
       img.alt = v.name + " · " + ch;
       img.loading = "lazy";
       img.tabIndex = 0;
@@ -146,12 +146,12 @@
     var note = el("div", "lt-panel__footnote");
     note.appendChild(document.createTextNode('注：业界有观点认为\u201c神龙本\u201d肥软散媚、气不贯通，描摹痕迹极重，水准太低，实际上是明代复刻作品。如'));
     var shuEx = document.createElement("a");
-    shuEx.href = "/assets/shu-stroke-issue.png";
+    shuEx.href = "../assets/shu-stroke-issue.png";
     shuEx.className = "lt-panel__note-link";
     shuEx.textContent = "「述」字撇被竖挡住";
     shuEx.addEventListener("click", function (e) {
       e.preventDefault();
-      if (window.ltOpenLightbox) window.ltOpenLightbox("/assets/shu-stroke-issue.png", "神龙本「述」字：撇被竖挡住");
+      if (window.ltOpenLightbox) window.ltOpenLightbox("../assets/shu-stroke-issue.png", "神龙本「述」字：撇被竖挡住");
     });
     note.appendChild(shuEx);
     note.appendChild(document.createTextNode("，笔画先后层次不清。"));
