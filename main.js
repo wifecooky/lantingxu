@@ -105,31 +105,28 @@
 
     var info = el("span", "lt-panel__pos");
     info.appendChild(document.createTextNode("第 " + (gidx + 1) + " 字 / 共 " + totalChars + " 字"));
-
-    /* 述字特殊标注 */
-    if (ch === "述") {
-      info.appendChild(document.createTextNode("　"));
-      var link = document.createElement("a");
-      link.href = "/assets/shu-stroke-issue.png";
-      link.className = "lt-panel__note-link";
-      link.textContent = "笔画层次问题 ▸";
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
-        if (window.ltOpenLightbox) window.ltOpenLightbox(link.href, "「述」字：撇被竖挡住，笔画先后层次不清");
-      });
-      info.appendChild(link);
-    }
-
     head.appendChild(info);
 
-    /* 神龙本说明链接 */
-    var noteLink = document.createElement("a");
-    noteLink.href = "https://www.bilibili.com/video/BV1sMSQBkEkU";
-    noteLink.target = "_blank";
-    noteLink.rel = "noopener";
-    noteLink.className = "lt-panel__head-note";
-    noteLink.textContent = "关于神龙本争议 ▸";
-    head.appendChild(noteLink);
+    /* 神龙本争议说明：「述」字为例 */
+    var noteWrap = el("span", "lt-panel__head-note-wrap");
+    var shuLink = document.createElement("a");
+    shuLink.href = "/assets/shu-stroke-issue.png";
+    shuLink.className = "lt-panel__head-note";
+    shuLink.textContent = "神龙本争议：如「述」字撇被竖挡住 ▸";
+    shuLink.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (window.ltOpenLightbox) window.ltOpenLightbox(shuLink.href, "神龙本「述」字：撇被竖挡住，描摹痕迹导致笔画先后层次不清");
+    });
+    noteWrap.appendChild(shuLink);
+
+    var refLink = document.createElement("a");
+    refLink.href = "https://www.bilibili.com/video/BV1sMSQBkEkU";
+    refLink.target = "_blank";
+    refLink.rel = "noopener";
+    refLink.className = "lt-panel__head-note";
+    refLink.textContent = "参考 ▸";
+    noteWrap.appendChild(refLink);
+    head.appendChild(noteWrap);
 
     var closeBtn = el("button", "lt-panel__close", "×");
     closeBtn.type = "button";

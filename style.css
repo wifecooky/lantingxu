@@ -553,12 +553,19 @@ a:hover {
   text-decoration: underline;
 }
 
+.lt-panel__head-note-wrap {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-right: 8px;
+}
+
 .lt-panel__head-note {
   font-size: 11px;
   color: var(--text-secondary);
   text-decoration: none;
   opacity: 0.6;
-  margin-right: 8px;
+  white-space: nowrap;
 }
 .lt-panel__head-note:hover {
   color: var(--accent);
