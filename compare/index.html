@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/style.css?v=2" />
     <script src="/theme.js"></script>
   </head>
   <body>
@@ -25,6 +25,16 @@
       </div>
     </header>
 
+    <!-- 搜索栏 -->
+    <div class="lt-search" id="lt-search">
+      <input type="text" class="lt-search__input" id="lt-search-input"
+             placeholder="搜索文字…" maxlength="10" aria-label="搜索文字">
+      <span class="lt-search__count" id="lt-search-count"></span>
+      <button class="lt-search__btn" id="lt-search-prev" type="button" aria-label="上一个" disabled>▲</button>
+      <button class="lt-search__btn" id="lt-search-next" type="button" aria-label="下一个" disabled>▼</button>
+      <button class="lt-search__btn lt-search__btn--clear" id="lt-search-clear" type="button" aria-label="清除" style="display:none">×</button>
+    </div>
+
     <!-- 卷轴区：由 main.js 填充 -->
     <div id="lt-scroll" class="lt-scroll" role="region" aria-label="兰亭序全文"></div>
 
@@ -32,7 +42,7 @@
     <div id="lt-panel" class="lt-panel" role="complementary" aria-label="字形对比" aria-live="polite"></div>
 
     <script src="/data/lanting-data.js"></script>
-    <script src="/main.js"></script>
+    <script src="/main.js?v=2"></script>
     <script src="/lightbox.js"></script>
   </body>
 </html>

@@ -159,7 +159,7 @@
   /* 面板外点击关闭 */
   document.addEventListener("click", function (e) {
     if (!panelRoot.classList.contains("lt-panel--open")) return;
-    if (e.target.closest("#lt-panel") || e.target.closest("#lt-scroll")) return;
+    if (e.target.closest("#lt-panel") || e.target.closest("#lt-scroll") || e.target.closest("#lt-search")) return;
     closePanel();
   });
 
@@ -195,6 +195,117 @@
     /* 确保该字在可视区 */
     allChars[next].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
   });
+
+  /* ---------- 搜索 ---------- */
+  var searchInput = document.getElementById("lt-search-input");
+  var searchCount = document.getElementById("lt-search-count");
+  var searchPrev = document.getElementById("lt-search-prev");
+  var searchNext = document.getElementById("lt-search-next");
+  var searchClear = document.getElementById("lt-search-clear");
+
+  var matches = [];
+  var matchIdx = -1;
+
+  function clearSearch() {
+    for (var i = 0; i < matches.length; i++) {
+      matches[i].classList.remove("lt-ch--match", "lt-ch--current");
+    }
+    matches = [];
+    matchIdx = -1;
+    searchCount.textContent = "";
+    searchPrev.disabled = true;
+    searchNext.disabled = true;
+    searchClear.style.display = "none";
+  }
+
+  function doSearch(query) {
+    clearSearch();
+    if (!query) return;
+
+    for (var i = 0; i < allChars.length; i++) {
+      if (allChars[i] && allChars[i].dataset.ch === query) {
+        matches.push(allChars[i]);
+        allChars[i].classList.add("lt-ch--match");
+      }
+    }
+
+    if (matches.length === 0) {
+      searchCount.textContent = "无结果";
+      searchClear.style.display = "";
+      return;
+    }
+
+    searchPrev.disabled = false;
+    searchNext.disabled = false;
+    searchClear.style.display = "";
+    goToMatch(0);
+  }
+
+  function goToMatch(idx) {
+    if (matches.length === 0) return;
+    if (matchIdx >= 0 && matchIdx < matches.length) {
+      matches[matchIdx].classList.remove("lt-ch--current");
+    }
+    matchIdx = ((idx % matches.length) + matches.length) % matches.length;
+    var el = matches[matchIdx];
+    el.classList.add("lt-ch--current");
+    searchCount.textContent = (matchIdx + 1) + " / " + matches.length;
+    el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+    fillPanel(el);
+  }
+
+  if (searchInput) {
+    var composing = false;
+
+    searchInput.addEventListener("compositionstart", function () { composing = true; });
+    searchInput.addEventListener("compositionend", function () {
+      composing = false;
+      /* setTimeout 确保 value 已更新（Chrome 的 compositionend 先于 input） */
+      setTimeout(runSearch, 0);
+    });
+
+    searchInput.addEventListener("input", function () {
+      if (!composing) runSearch();
+    });
+
+    /* 兜底：聚焦时按下任意键后 200ms 检查一次（跳过导航键） */
+    var checkTimer = null;
+    searchInput.addEventListener("keyup", function (e) {
+      if (e.key === "Enter" || e.key === "Escape" || e.key === "Shift") return;
+      clearTimeout(checkTimer);
+      checkTimer = setTimeout(function () {
+        if (!composing) runSearch();
+      }, 200);
+    });
+
+    function runSearch() {
+      var q = searchInput.value.trim();
+      /* 取最后一个字符搜索 */
+      var last = q.length > 0 ? q.charAt(q.length - 1) : "";
+      doSearch(last);
+    }
+
+    searchInput.addEventListener("keydown", function (e) {
+      if (composing) return;
+      if (e.key === "Enter") {
+        e.preventDefault();
+        if (matches.length > 0) goToMatch(e.shiftKey ? matchIdx - 1 : matchIdx + 1);
+      }
+      if (e.key === "Escape") {
+        searchInput.value = "";
+        clearSearch();
+        searchInput.blur();
+      }
+    });
+
+    searchPrev.addEventListener("click", function () { goToMatch(matchIdx - 1); });
+    searchNext.addEventListener("click", function () { goToMatch(matchIdx + 1); });
+    searchClear.addEventListener("click", function () {
+      searchInput.value = "";
+      clearSearch();
+      searchInput.focus();
+    });
+  }
 
   /* 初始：滚到最右（竖排卷轴的开头） */
   requestAnimationFrame(function () {
