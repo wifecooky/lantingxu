@@ -102,7 +102,35 @@
     /* Header */
     var head = el("div", "lt-panel__head");
     head.appendChild(el("span", "lt-panel__char", ch));
-    head.appendChild(el("span", "lt-panel__pos", "第 " + (gidx + 1) + " 字 / 共 " + totalChars + " 字"));
+
+    var info = el("span", "lt-panel__pos");
+    info.appendChild(document.createTextNode("第 " + (gidx + 1) + " 字 / 共 " + totalChars + " 字"));
+
+    /* 述字特殊标注 */
+    if (ch === "述") {
+      info.appendChild(document.createTextNode("　"));
+      var link = document.createElement("a");
+      link.href = "/assets/shu-stroke-issue.png";
+      link.className = "lt-panel__note-link";
+      link.textContent = "笔画层次问题 ▸";
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (window.ltOpenLightbox) window.ltOpenLightbox(link.href, "「述」字：撇被竖挡住，笔画先后层次不清");
+      });
+      info.appendChild(link);
+    }
+
+    head.appendChild(info);
+
+    /* 神龙本说明链接 */
+    var noteLink = document.createElement("a");
+    noteLink.href = "https://www.bilibili.com/video/BV1sMSQBkEkU";
+    noteLink.target = "_blank";
+    noteLink.rel = "noopener";
+    noteLink.className = "lt-panel__head-note";
+    noteLink.textContent = "关于神龙本争议 ▸";
+    head.appendChild(noteLink);
+
     var closeBtn = el("button", "lt-panel__close", "×");
     closeBtn.type = "button";
     closeBtn.setAttribute("aria-label", "关闭");
@@ -137,36 +165,6 @@
     });
 
     panelRoot.appendChild(grid);
-
-    /* 版本说明 */
-    var note = el("div", "lt-panel__note");
-    var noteText = "神龙本（冯承素摹）：业界有观点认为描摹痕迹极重，笔画先后层次不清";
-    if (ch === "述") {
-      noteText += "（如此「述」字";
-      var link = document.createElement("a");
-      link.href = "/assets/shu-stroke-issue.png";
-      link.className = "lt-panel__note-link";
-      link.textContent = "撇被竖挡住";
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
-        if (window.ltOpenLightbox) window.ltOpenLightbox(link.href, "「述」字笔画层次问题");
-      });
-      note.appendChild(document.createTextNode(noteText));
-      note.appendChild(link);
-      note.appendChild(document.createTextNode("），或为明代复刻。"));
-    } else {
-      noteText += "，或为明代复刻。";
-      note.textContent = noteText;
-    }
-    var ref = document.createElement("a");
-    ref.href = "https://www.bilibili.com/video/BV1sMSQBkEkU";
-    ref.target = "_blank";
-    ref.rel = "noopener";
-    ref.className = "lt-panel__note-link";
-    ref.textContent = "参考";
-    note.appendChild(document.createTextNode(" "));
-    note.appendChild(ref);
-    panelRoot.appendChild(note);
 
     charEl.classList.add("lt-ch--active");
     activeChar = charEl;

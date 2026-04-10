@@ -543,22 +543,26 @@ a:hover {
    面板内说明
    ============================================ */
 
-.lt-panel__note {
-  font-size: 12px;
-  line-height: 1.7;
-  color: var(--text-secondary);
-  padding: 6px clamp(16px, 3vw, 24px) 10px;
-  border-top: 1px solid var(--border);
-  opacity: 0.7;
-}
-
 .lt-panel__note-link {
   color: var(--accent);
   text-decoration: none;
   cursor: pointer;
+  font-size: 12px;
 }
 .lt-panel__note-link:hover {
   text-decoration: underline;
+}
+
+.lt-panel__head-note {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  opacity: 0.6;
+  margin-right: 8px;
+}
+.lt-panel__head-note:hover {
+  color: var(--accent);
+  opacity: 1;
 }
 
 /* ============================================
