@@ -13,10 +13,10 @@ window.LT_CONFIG = {
   subtitle: "王羲之",
 
   versions: [
-    { id: "shenlong", name: "神龙本", attr: "冯承素摹", loc: "北京故宫博物院", note: "公认最接近原迹，双钩廓填法" },
-    { id: "chu",      name: "褚摹本", attr: "褚遂良摹", loc: "北京故宫博物院", note: "黄绢本，褚遂良风格明显" },
-    { id: "yu",       name: "虞摹本", attr: "虞世南摹", loc: "北京故宫博物院", note: "又称天历本，圆润温雅" },
-    { id: "dingwu",   name: "定武本", attr: "欧阳询临刻", loc: "拓本系统",     note: "石刻拓本，刚劲方正" },
+    { id: "dingwu",   name: "定武本", attr: "欧阳询临刻", loc: "拓本系统",     note: "石刻拓本，刚劲方正，传为欧阳询奉敕临写后刻石" },
+    { id: "yu",       name: "虞摹本", attr: "虞世南摹", loc: "北京故宫博物院", note: "又称天历本，圆润温雅，气韵最近原帖" },
+    { id: "chu",      name: "褚摹本", attr: "褚遂良摹", loc: "北京故宫博物院", note: "黄绢本，用笔遒美，褚遂良风格明显" },
+    { id: "shenlong", name: "神龙本", attr: "冯承素摹", loc: "北京故宫博物院", note: "双钩廓填法，描摹痕迹较重，或为明代复刻" },
   ],
 
   sentences: [
