@@ -144,7 +144,7 @@
 
     /* 神龙本争议说明 */
     var note = el("div", "lt-panel__footnote");
-    note.appendChild(document.createTextNode("注：业界有观点认为"神龙本"肥软散媚、气不贯通，描摹痕迹极重，水准太低，实际上是明代复刻作品。如"));
+    note.appendChild(document.createTextNode('注：业界有观点认为\u201c神龙本\u201d肥软散媚、气不贯通，描摹痕迹极重，水准太低，实际上是明代复刻作品。如'));
     var shuEx = document.createElement("a");
     shuEx.href = "/assets/shu-stroke-issue.png";
     shuEx.className = "lt-panel__note-link";
