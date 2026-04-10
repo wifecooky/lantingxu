@@ -107,27 +107,6 @@
     info.appendChild(document.createTextNode("第 " + (gidx + 1) + " 字 / 共 " + totalChars + " 字"));
     head.appendChild(info);
 
-    /* 神龙本争议说明：「述」字为例 */
-    var noteWrap = el("span", "lt-panel__head-note-wrap");
-    var shuLink = document.createElement("a");
-    shuLink.href = "/assets/shu-stroke-issue.png";
-    shuLink.className = "lt-panel__head-note";
-    shuLink.textContent = "神龙本争议：如「述」字撇被竖挡住 ▸";
-    shuLink.addEventListener("click", function (e) {
-      e.preventDefault();
-      if (window.ltOpenLightbox) window.ltOpenLightbox(shuLink.href, "神龙本「述」字：撇被竖挡住，描摹痕迹导致笔画先后层次不清");
-    });
-    noteWrap.appendChild(shuLink);
-
-    var refLink = document.createElement("a");
-    refLink.href = "https://www.bilibili.com/video/BV1sMSQBkEkU";
-    refLink.target = "_blank";
-    refLink.rel = "noopener";
-    refLink.className = "lt-panel__head-note";
-    refLink.textContent = "参考 ▸";
-    noteWrap.appendChild(refLink);
-    head.appendChild(noteWrap);
-
     var closeBtn = el("button", "lt-panel__close", "×");
     closeBtn.type = "button";
     closeBtn.setAttribute("aria-label", "关闭");
@@ -162,6 +141,28 @@
     });
 
     panelRoot.appendChild(grid);
+
+    /* 神龙本争议说明 */
+    var note = el("div", "lt-panel__footnote");
+    note.appendChild(document.createTextNode("注：业界有观点认为"神龙本"肥软散媚、气不贯通，描摹痕迹极重，水准太低，实际上是明代复刻作品。如"));
+    var shuEx = document.createElement("a");
+    shuEx.href = "/assets/shu-stroke-issue.png";
+    shuEx.className = "lt-panel__note-link";
+    shuEx.textContent = "「述」字撇被竖挡住";
+    shuEx.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (window.ltOpenLightbox) window.ltOpenLightbox("/assets/shu-stroke-issue.png", "神龙本「述」字：撇被竖挡住");
+    });
+    note.appendChild(shuEx);
+    note.appendChild(document.createTextNode("，笔画先后层次不清。"));
+    var refV = document.createElement("a");
+    refV.href = "https://www.bilibili.com/video/BV1sMSQBkEkU";
+    refV.target = "_blank";
+    refV.rel = "noopener";
+    refV.className = "lt-panel__note-link";
+    refV.textContent = "参考视频";
+    note.appendChild(refV);
+    panelRoot.appendChild(note);
 
     charEl.classList.add("lt-ch--active");
     activeChar = charEl;
