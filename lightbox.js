@@ -46,6 +46,9 @@
     setTimeout(function () { img.src = ""; }, 300);
   }
 
+  /* 暴露给外部调用 */
+  window.ltOpenLightbox = open;
+
   /* 委派点击 */
   document.addEventListener("click", function (e) {
     var panelImg = e.target.closest(".lt-panel__img");
