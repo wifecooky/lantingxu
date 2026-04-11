@@ -344,8 +344,9 @@
     });
   }
 
-  /* 初始：滚到最右（竖排卷轴的开头） */
+  /* 初始：滚到最右（竖排卷轴的开头）并选中第一个字 */
   requestAnimationFrame(function () {
     scroll.scrollLeft = scroll.scrollWidth;
+    if (allChars[0]) fillPanel(allChars[0]);
   });
 })();
