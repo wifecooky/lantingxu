@@ -128,7 +128,7 @@
       var imgWrap = el("div", "lt-panel__img-wrap");
       var img = document.createElement("img");
       img.className = "lt-panel__img";
-      var fileIdx = v.id === "chu" ? chuCharIdx(gidx) + 1 : gidx + 1;
+      var fileIdx = v.id === "shenlong" ? gidx + 1 : chuCharIdx(gidx) + 1;
       img.src = "../assets/" + v.id + "/" + padNum(fileIdx) + ".jpg";
       img.alt = v.name + " · " + ch;
       img.loading = "lazy";
