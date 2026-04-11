@@ -28,6 +28,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./landing.css" />
     <script src="./theme.js"></script>
     <script type="application/ld+json">
     {
@@ -52,57 +53,101 @@
     </header>
 
     <main class="page">
-      <!-- 标题区 -->
+      <!-- 主视觉 -->
       <div class="landing-hero">
+        <div class="landing-hero__chars" aria-hidden="true">
+          <span class="landing-hero__char" style="--delay:0">永</span>
+          <span class="landing-hero__char" style="--delay:1">和</span>
+          <span class="landing-hero__char" style="--delay:2">九</span>
+          <span class="landing-hero__char" style="--delay:3">年</span>
+        </div>
         <h1 class="landing-hero__title">蘭亭序</h1>
         <p class="landing-hero__subtitle">王羲之 · 永和九年</p>
+        <div class="landing-hero__rule"></div>
         <p class="landing-hero__desc">
           永和九年三月初三，王羲之与友人会于会稽山阴之兰亭，修禊事。
           王羲之乘兴而书，写下这篇被誉为「天下第一行书」的序文。
-          原迹已不存，传世者皆为唐代摹本与刻本。本站收录四种主要版本，逐字并列对比。
+          原迹已不存，传世者皆为唐代摹本与刻本。
         </p>
+        <p class="landing-hero__tagline">本站收录四种主要版本，逐字并列对比</p>
       </div>
 
-      <!-- 版本卡片 -->
+      <!-- 四版对比预览 -->
       <section class="versions">
-        <h2 class="versions__heading">收录版本</h2>
+        <h2 class="versions__heading">四 本 并 观</h2>
         <div class="versions__grid">
 
-          <article class="version-card">
-            <h3 class="version-card__name">定武本</h3>
-            <p class="version-card__attr">欧阳询临刻</p>
-            <p class="version-card__loc">拓本系统</p>
-            <p class="version-card__note">石刻拓本，刚劲方正，传为欧阳询奉敕临写后刻石</p>
-          </article>
+          <a href="./compare/" class="version-card version-card--dingwu">
+            <div class="version-card__preview">
+              <img src="./assets/dingwu/001.jpg" alt="定武本「永」" class="version-card__img" loading="lazy">
+              <img src="./assets/dingwu/002.jpg" alt="定武本「和」" class="version-card__img" loading="lazy">
+              <img src="./assets/dingwu/003.jpg" alt="定武本「九」" class="version-card__img" loading="lazy">
+            </div>
+            <div class="version-card__body">
+              <h3 class="version-card__name">定武本</h3>
+              <p class="version-card__attr">欧阳询临刻 · 拓本</p>
+              <p class="version-card__note">石刻拓本，刚劲方正</p>
+            </div>
+          </a>
 
-          <article class="version-card">
-            <h3 class="version-card__name">虞摹本</h3>
-            <p class="version-card__attr">虞世南摹</p>
-            <p class="version-card__loc">北京故宫博物院</p>
-            <p class="version-card__note">又称天历本，圆润温雅，气韵最近原帖</p>
-          </article>
+          <a href="./compare/" class="version-card version-card--yu">
+            <div class="version-card__preview">
+              <img src="./assets/yu/001.jpg" alt="虞摹本「永」" class="version-card__img" loading="lazy">
+              <img src="./assets/yu/002.jpg" alt="虞摹本「和」" class="version-card__img" loading="lazy">
+              <img src="./assets/yu/003.jpg" alt="虞摹本「九」" class="version-card__img" loading="lazy">
+            </div>
+            <div class="version-card__body">
+              <h3 class="version-card__name">虞摹本</h3>
+              <p class="version-card__attr">虞世南摹 · 北京故宫博物院</p>
+              <p class="version-card__note">又称天历本，圆润温雅</p>
+            </div>
+          </a>
 
-          <article class="version-card">
-            <h3 class="version-card__name">褚摹本</h3>
-            <p class="version-card__attr">褚遂良摹</p>
-            <p class="version-card__loc">北京故宫博物院</p>
-            <p class="version-card__note">黄绢本，用笔遒美，褚遂良风格明显</p>
-          </article>
+          <a href="./compare/" class="version-card version-card--chu">
+            <div class="version-card__preview">
+              <img src="./assets/chu/001.jpg" alt="褚摹本「永」" class="version-card__img" loading="lazy">
+              <img src="./assets/chu/002.jpg" alt="褚摹本「和」" class="version-card__img" loading="lazy">
+              <img src="./assets/chu/003.jpg" alt="褚摹本「九」" class="version-card__img" loading="lazy">
+            </div>
+            <div class="version-card__body">
+              <h3 class="version-card__name">褚摹本</h3>
+              <p class="version-card__attr">褚遂良摹 · 北京故宫博物院</p>
+              <p class="version-card__note">黄绢本，用笔遒美</p>
+            </div>
+          </a>
 
-          <article class="version-card">
-            <h3 class="version-card__name">神龙本</h3>
-            <p class="version-card__attr">冯承素摹</p>
-            <p class="version-card__loc">北京故宫博物院</p>
-            <p class="version-card__note">双钩廓填法，描摹痕迹较重，或为明代复刻</p>
-          </article>
+          <a href="./compare/" class="version-card version-card--shenlong">
+            <div class="version-card__preview">
+              <img src="./assets/shenlong/001.jpg" alt="神龙本「永」" class="version-card__img" loading="lazy">
+              <img src="./assets/shenlong/002.jpg" alt="神龙本「和」" class="version-card__img" loading="lazy">
+              <img src="./assets/shenlong/003.jpg" alt="神龙本「九」" class="version-card__img" loading="lazy">
+            </div>
+            <div class="version-card__body">
+              <h3 class="version-card__name">神龙本</h3>
+              <p class="version-card__attr">冯承素摹 · 北京故宫博物院</p>
+              <p class="version-card__note">双钩廓填法</p>
+            </div>
+          </a>
 
         </div>
       </section>
 
-      <!-- 进入对比 -->
+      <!-- CTA -->
       <div class="landing-cta">
-        <a href="./compare/" class="landing-cta__btn">进入对比</a>
+        <a href="./compare/" class="landing-cta__btn">
+          <span class="landing-cta__text">进入逐字对比</span>
+          <span class="landing-cta__arrow">&#8594;</span>
+        </a>
+        <p class="landing-cta__hint">324 字 · 四版并列</p>
       </div>
+
+      <!-- 底部引文 -->
+      <footer class="landing-footer">
+        <blockquote class="landing-footer__quote">
+          <p>「仰觀宇宙之大，俯察品類之盛，所以遊目騁懷，足以極視聽之娛，信可樂也。」</p>
+        </blockquote>
+      </footer>
+
     </main>
 
   </body>

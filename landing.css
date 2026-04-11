@@ -1,0 +1,321 @@
+/* 兰亭序 · 首页专属样式
+ * 古卷展览级视觉：克制、留白、书法气韵
+ */
+
+/* ============================================
+   主视觉区
+   ============================================ */
+
+.landing-hero {
+  text-align: center;
+  margin-bottom: clamp(64px, 10vh, 120px);
+  position: relative;
+}
+
+/* 背景大字 —— 淡墨水印效果 */
+.landing-hero__chars {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: -20px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.landing-hero__char {
+  font-size: clamp(80px, 18vw, 160px);
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0;
+  color: var(--text);
+  filter: opacity(0.06);
+  animation: charReveal 1.2s ease-out forwards;
+  animation-delay: calc(var(--delay) * 0.15s + 0.3s);
+}
+
+@keyframes charReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: opacity(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: opacity(0.06);
+  }
+}
+
+[data-theme="light"] .landing-hero__char {
+  filter: opacity(0.04);
+}
+[data-theme="light"] @keyframes charReveal {
+  to { filter: opacity(0.04); }
+}
+
+.landing-hero__title {
+  font-size: clamp(40px, 8vw, 72px);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  margin: 0 0 12px;
+  line-height: 1.2;
+  position: relative;
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out 0.6s forwards;
+}
+
+.landing-hero__subtitle {
+  font-size: clamp(14px, 1.8vw, 17px);
+  color: var(--text-secondary);
+  margin: 0 0 32px;
+  letter-spacing: 0.35em;
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out 0.8s forwards;
+}
+
+.landing-hero__rule {
+  width: 48px;
+  height: 1px;
+  background: var(--accent);
+  margin: 0 auto 32px;
+  opacity: 0;
+  animation: ruleExpand 1s ease-out 1s forwards;
+}
+
+@keyframes ruleExpand {
+  from { opacity: 0; width: 0; }
+  to { opacity: 0.6; width: 48px; }
+}
+
+.landing-hero__desc {
+  font-size: clamp(15px, 1.6vw, 17px);
+  line-height: 2;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin: 0 auto 20px;
+  text-align: justify;
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out 1.1s forwards;
+}
+
+.landing-hero__tagline {
+  font-size: clamp(13px, 1.4vw, 15px);
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  margin: 0;
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out 1.3s forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   版本卡片（带预览图）
+   ============================================ */
+
+.versions {
+  margin-bottom: clamp(64px, 10vh, 120px);
+}
+
+.versions__heading {
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 400;
+  text-align: center;
+  margin: 0 0 clamp(32px, 5vh, 56px);
+  letter-spacing: 0.5em;
+  color: var(--text-secondary);
+}
+
+.versions__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(16px, 2.5vw, 24px);
+}
+
+.version-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  animation: cardIn 0.6s ease-out forwards;
+}
+.version-card:nth-child(1) { animation-delay: 1.4s; }
+.version-card:nth-child(2) { animation-delay: 1.55s; }
+.version-card:nth-child(3) { animation-delay: 1.7s; }
+.version-card:nth-child(4) { animation-delay: 1.85s; }
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.version-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+}
+
+.version-card__preview {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  padding: 16px 16px 8px;
+  min-height: 100px;
+}
+
+.version-card__img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease;
+}
+
+.version-card:hover .version-card__img {
+  transform: scale(1.08);
+}
+
+/* 定武本是拓本（深色），给个特殊背景 */
+.version-card--dingwu .version-card__preview {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 8px 8px 0 0;
+}
+[data-theme="light"] .version-card--dingwu .version-card__preview {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.version-card__body {
+  padding: 12px 20px 20px;
+  flex: 1;
+}
+
+.version-card__name {
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 700;
+  margin: 0 0 6px;
+  letter-spacing: 0.05em;
+}
+
+.version-card__attr {
+  font-size: 13px;
+  color: var(--accent);
+  margin: 0 0 6px;
+  letter-spacing: 0.03em;
+}
+
+.version-card__note {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ============================================
+   CTA
+   ============================================ */
+
+.landing-cta {
+  text-align: center;
+  margin-bottom: clamp(64px, 10vh, 120px);
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out 2s forwards;
+}
+
+.landing-cta__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 48px;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.landing-cta__btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(122, 158, 126, 0.25);
+  text-decoration: none;
+}
+
+.landing-cta__arrow {
+  font-size: 20px;
+  transition: transform 0.25s ease;
+}
+.landing-cta__btn:hover .landing-cta__arrow {
+  transform: translateX(4px);
+}
+
+.landing-cta__hint {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 16px 0 0;
+  letter-spacing: 0.1em;
+}
+
+/* ============================================
+   底部引文
+   ============================================ */
+
+.landing-footer {
+  text-align: center;
+  padding-bottom: clamp(48px, 8vh, 96px);
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out 2.2s forwards;
+}
+
+.landing-footer__quote {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.landing-footer__quote p {
+  font-size: clamp(14px, 1.6vw, 16px);
+  line-height: 2.2;
+  color: var(--text-secondary);
+  opacity: 0.6;
+  letter-spacing: 0.08em;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   响应式
+   ============================================ */
+
+@media (max-width: 600px) {
+  .versions__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .version-card__preview {
+    padding: 12px 12px 6px;
+  }
+
+  .version-card__img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .landing-hero__chars {
+    margin-bottom: -10px;
+  }
+}
