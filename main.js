@@ -128,7 +128,7 @@
       var imgWrap = el("div", "lt-panel__img-wrap");
       var img = document.createElement("img");
       img.className = "lt-panel__img";
-      var fileIdx = v.id === "chu" ? chuCharIdx(gidx) + 1 : gidx + 1;
+      var fileIdx = (v.id === "chu" || v.id === "yu") ? chuCharIdx(gidx) + 1 : gidx + 1;
       img.src = "../assets/" + v.id + "/" + padNum(fileIdx) + ".jpg";
       img.alt = v.name + " · " + ch;
       img.loading = "lazy";
@@ -148,6 +148,10 @@
     });
 
     panelRoot.appendChild(grid);
+
+    /* 滑动提示（仅小屏显示） */
+    var swipeHint = el("div", "lt-panel__swipe-hint", "\u2190 左右滑动查看更多 \u2192");
+    panelRoot.appendChild(swipeHint);
 
     /* 神龙本争议说明 */
     var note = el("div", "lt-panel__footnote");

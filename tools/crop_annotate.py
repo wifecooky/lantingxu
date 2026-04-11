@@ -56,13 +56,14 @@ DEFAULTS = {
     "chu": {
         "text_segments": ["csl03.jpg", "csl04.jpg", "csl05.jpg", "csl06.jpg"],
         "text_region": [0.0, 0.0, 1.0, 0.97],
+        "enhance": True,
     },
     "yu": {
         "text_segments": [
-            "ysn01.jpg", "ysn02.jpg", "ysn03.jpg", "ysn04.jpg",
-            "ysn05.jpg", "ysn06.jpg", "ysn07.jpg",
+            "ysn06.jpg", "ysn07.jpg", "ysn08.jpg", "ysn09.jpg",
         ],
-        "text_region": [0.0, 0.0, 1.0, 0.92],
+        "text_region": [0.0, 0.0, 1.0, 0.98],
+        "enhance": True,
     },
     "dingwu": {
         "text_segments": [
@@ -70,6 +71,7 @@ DEFAULTS = {
             "dw05.jpg", "dw06.jpg",
         ],
         "text_region": [0.0, 0.0, 1.0, 0.95],
+        "enhance": False,  # 拓本已是高对比度
     },
 }
 
@@ -169,7 +171,44 @@ def estimate_chars_in_col(binary, x0, x1):
     return max(1, len(regions))
 
 
-def make_square(img, size=300):
+def enhance_ink(img):
+    """增强墨迹：背景估算去除 + 对比度拉伸 + 温和锐化"""
+    import cv2
+    arr = np.array(img)
+    bgr = cv2.cvtColor(arr, cv2.COLOR_RGB2BGR)
+    gray = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
+
+    # 高斯模糊估算背景（纸张色）
+    bg = cv2.GaussianBlur(gray, (51, 51), 0)
+    # 墨迹 = 背景 - 原图（墨迹处更暗）
+    diff = bg.astype(float) - gray.astype(float)
+    diff = np.clip(diff, 0, None)
+
+    # 用 diff 构建增强比例（墨迹处加深）
+    ink_strength = diff / (diff.max() + 1e-6)
+    darken = 1.0 - ink_strength * 0.5  # 墨迹处最多加深50%
+
+    result = bgr.astype(float)
+    for c in range(3):
+        result[:, :, c] = result[:, :, c] * darken
+
+    # 整体对比度拉伸
+    lab = cv2.cvtColor(np.clip(result, 0, 255).astype(np.uint8), cv2.COLOR_BGR2LAB)
+    l, a, b = cv2.split(lab)
+    clahe = cv2.createCLAHE(clipLimit=1.5, tileGridSize=(16, 16))
+    l = clahe.apply(l)
+    result = cv2.cvtColor(cv2.merge([l, a, b]), cv2.COLOR_LAB2BGR)
+
+    # 温和锐化
+    result = cv2.GaussianBlur(result, (0, 0), 3)
+    result = cv2.addWeighted(
+        cv2.cvtColor(cv2.merge([l, a, b]), cv2.COLOR_LAB2BGR), 1.3,
+        result, -0.3, 0)
+
+    return Image.fromarray(cv2.cvtColor(result, cv2.COLOR_BGR2RGB))
+
+
+def make_square(img, size=300, enhance=False):
     w, h = img.size
     ratio = min(size / w, size / h) * 0.88
     new_w, new_h = int(w * ratio), int(h * ratio)
@@ -350,11 +389,13 @@ def cmd_preview(version):
 
 def cmd_crop(version):
     ann = load_annotation(version)
+    cfg = DEFAULTS[version]
+    do_enhance = cfg.get("enhance", False)
     total = sum(c[2] for seg in ann["segments"] for c in seg["columns"])
-    if total < 300:
+    if total < 100:
         print("错误: 字数总和 = %d，太少了" % total)
         sys.exit(1)
-    print("总字数: %d" % total)
+    print("总字数: %d, 增强: %s" % (total, "是" if do_enhance else "否"))
 
     output_dir = os.path.join(get_base(), "assets", version)
 
@@ -369,6 +410,8 @@ def cmd_crop(version):
     for seg in ann["segments"]:
         path = seg_path(version, seg["file"])
         img = Image.open(path)
+        if do_enhance:
+            img = enhance_ink(img)
         w, h = img.size
         tr = seg["text_region"]
         tx0, ty0 = int(w * tr[0]), int(h * tr[1])
@@ -768,8 +811,8 @@ h1 { color: #e0c080; }
 
     for i, f in enumerate(chars):
         num = i + 1
-        # 褚摹本：崇山峻合并为一格
-        if version == "chu":
+        # 崇山峻合并为一格的版本
+        if version in ("chu", "yu"):
             display_text = CHU_TEXT
         else:
             display_text = FULL_TEXT
