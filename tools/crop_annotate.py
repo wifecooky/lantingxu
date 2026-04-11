@@ -812,7 +812,7 @@ h1 { color: #e0c080; }
     for i, f in enumerate(chars):
         num = i + 1
         # 崇山峻合并为一格的版本
-        if version in ("chu", "yu"):
+        if version in ("chu", "yu", "dingwu"):
             display_text = CHU_TEXT
         else:
             display_text = FULL_TEXT
