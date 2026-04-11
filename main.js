@@ -32,6 +32,12 @@
   function empty(node) {
     while (node.firstChild) node.removeChild(node.firstChild);
   }
+  /* 褚摹本字序映射：崇山峻(字37-39)合并为1格，之后编号偏移-2 */
+  function chuCharIdx(gidx) {
+    if (gidx < 36) return gidx;       /* 1-36: 永…有 */
+    if (gidx < 39) return 36;          /* 37-39: 崇山峻 → 图37 */
+    return gidx - 2;                   /* 40+: 嶺… → 图38+ */
+  }
 
   /* ---------- 渲染卷轴 ---------- */
   var scroll = document.getElementById("lt-scroll");
@@ -122,7 +128,8 @@
       var imgWrap = el("div", "lt-panel__img-wrap");
       var img = document.createElement("img");
       img.className = "lt-panel__img";
-      img.src = "../assets/" + v.id + "/" + padNum(gidx + 1) + ".jpg";
+      var fileIdx = v.id === "chu" ? chuCharIdx(gidx) + 1 : gidx + 1;
+      img.src = "../assets/" + v.id + "/" + padNum(fileIdx) + ".jpg";
       img.alt = v.name + " · " + ch;
       img.loading = "lazy";
       img.tabIndex = 0;
